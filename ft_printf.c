@@ -23,11 +23,7 @@ static int	ft_convert(const char *str, va_list args)
 		count += ft_putchar(args, count);
 	else if (str == 's')
 		count += ft_str(args, count);
-	else if (str == 'p')
-		count +=
-	else if (str == 'i')
-		count += ft_putnbr(args);
-	else if (str == 'd')
+	else if (str == 'i' || str == 'd')
 		count += ft_putnbr(args);
 	else if (str == 'u')
 		count +=
@@ -35,7 +31,8 @@ static int	ft_convert(const char *str, va_list args)
 		count +=
 	else if (str == 'X')
 		count +=
-
+	else if (str == 'p')
+		count +=
 	return (count);
 }
 
