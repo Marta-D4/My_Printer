@@ -6,7 +6,7 @@
 /*   By: madiaz-e <madiaz-e@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 13:36:35 by madiaz-e          #+#    #+#             */
-/*   Updated: 2025/11/05 13:22:16 by madiaz-e         ###   ########.fr       */
+/*   Updated: 2025/11/07 10:51:23 by madiaz-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ static int	ft_convert(const char *str, va_list args)
 	else if (str == 'i' || str == 'd')
 		count += ft_putnbr(args);
 	else if (str == 'u')
-		count +=
+		count += ft_putunsnbr(args);
 	else if (str == 'x')
-		count +=
+		count += ft_puthex(args, "0123456789abcdef");
 	else if (str == 'X')
-		count +=
+		count += ft_puthex(args, "0123456789ABCDEF");
 	else if (str == 'p')
-		count +=
+		count += ft_putptr(args);
 	return (count);
 }
 
