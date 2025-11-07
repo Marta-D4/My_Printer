@@ -12,17 +12,18 @@
 
 #include "ft_printf.h"
 
+//CONVERSIÓN %c
+//Solo añadimos 1 a count pq solo escribe un caracter
 int	ft_putchar(va_list args, int count)
 {
 	char	c;
 
 	c = va_arg(args, int);
-	count++;
-	write(1, &c, 1);
+	count += write(1, &c, 1);
 	return (count);
 }
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(const char *s) //Longitud de una cadena
 {
 	size_t	i;
 
@@ -32,7 +33,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char *s, int fd) //Escritura de una cadena
 {
 	int	i;
 
@@ -44,6 +45,9 @@ void	ft_putstr_fd(char *s, int fd)
 	}
 }
 
+//CONVERSIÓN %s
+//Si la cadena está vacia devolvemos (null), si no mandamos la
+//cadena por el terminal y devolvemos su longitud.
 int	ft_str(va_list args, int count)
 {
 	char	*str;
