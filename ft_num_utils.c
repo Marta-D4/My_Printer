@@ -12,6 +12,8 @@
 
 #include "ft_printf.h"
 
+//CONVERSIÓN %i %d
+//Como un putnbr normal, pero contando cada num
 int	ft_putnbr(int nb)
 {
 	int		count;
@@ -41,6 +43,8 @@ int	ft_putnbr(int nb)
 	return (count);
 }
 
+//CONVERSIÓN %u
+//Similar al putnbr pero sin comprobar negativos y MINMAX
 int	ft_putunsnbr(unsigned int nb)
 {
 	int		count;
@@ -60,6 +64,8 @@ int	ft_putunsnbr(unsigned int nb)
 	return (count);
 }
 
+//CONVERSIÓN %x %X
+//Tmb como el putnbr, aunque la base es hexadecimal[16]
 int	ft_puthex(unsigned long long nb, char *hex)
 {
 	int	count;
@@ -75,6 +81,9 @@ int	ft_puthex(unsigned long long nb, char *hex)
 	return (count);
 }
 
+//CONVERSIÓN %p
+//Los ptr van con la base hexadecimal, llamamos a puthex. Si no tiene
+//nada que apuntar devolvemos (nil), si no escribimos 0x antes de puthex
 int	ft_putptr(void *ptr)
 {
 	int	count;
