@@ -6,18 +6,17 @@
 /*   By: madiaz-e <madiaz-e@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 12:08:50 by madiaz-e          #+#    #+#             */
-/*   Updated: 2025/11/07 10:53:49 by madiaz-e         ###   ########.fr       */
+/*   Updated: 2025/11/07 11:53:30 by madiaz-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libprintf.h"
+#include "ft_printf.h"
 
-int	ft_putnbr(va_list args)
+int	ft_putnbr(int nb)
 {
-	int	nb;
-	int	count;
+	int		count;
+	char	x;
 
-	nb = va_arg(args, int);
 	count = 0;
 	if (nb == -2147483648)
 	{
@@ -26,7 +25,7 @@ int	ft_putnbr(va_list args)
 	}
 	if (nb < 0)
 	{
-		count += write(1, '-', 1);
+		count += write(1, "-", 1);
 		count += ft_putnbr(-nb);
 	}
 	else if (nb > 9)
@@ -35,16 +34,18 @@ int	ft_putnbr(va_list args)
 		count += ft_putnbr(nb % 10);
 	}
 	else
-		count += write(1, nb + '0', 1);
+	{
+		x = nb + '0';
+		count += write(1, &x, 1);
+	}
 	return (count);
 }
 
-int	ft_putunsnbr(va_list args)
+int	ft_putunsnbr(unsigned int nb)
 {
-	unsigned int	nb;
-	int				count;
+	int		count;
+	char	x;
 
-	nb = va_arg(args, unsigned int);
 	count = 0;
 	if (nb > 9)
 	{
@@ -52,35 +53,39 @@ int	ft_putunsnbr(va_list args)
 		count += ft_putunsnbr(nb % 10);
 	}
 	else
-		count += write(1, nb + '0', 1);
+	{
+		x = nb + '0';
+		count += write(1, &x, 1);
+	}
 	return (count);
 }
 
-int	ft_puthex(va_list args, char *hex)
+int	ft_puthex(unsigned long long nb, char *hex)
 {
-	unsigned long long	nb;
-	int					count;
+	int	count;
 
-	nb = va_arg(args, unsigned long long);
 	count = 0;
 	if (nb < 16)
 		count += write(1, &hex[nb], 1);
 	else
 	{
-		count += ft_puthex(args, hex);
+		count += ft_puthex(nb, hex);
 		count += write(1, &hex[nb % 16], 1);
 	}
 	return (count);
 }
 
-int	ft_putptr(va_list args)
+int	ft_putptr(void *ptr)
 {
-	unsigned long long	ptr;
-	int					count;
+	int	count;
 
-	ptr = va_arg(args, unsigned long long);
 	count = 0;
+	if (!ptr)
+	{
+		count += write(1, "(nil)", 5);
+		return (count);
+	}
 	count += write(1, "0x", 2);
-	count += ft_puthex(ptr, "0123456789abcdef");
+	count += ft_puthex((unsigned long long)ptr, "0123456789abcdef");
 	return (count);
 }

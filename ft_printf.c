@@ -6,13 +6,13 @@
 /*   By: madiaz-e <madiaz-e@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 13:36:35 by madiaz-e          #+#    #+#             */
-/*   Updated: 2025/11/07 10:51:23 by madiaz-e         ###   ########.fr       */
+/*   Updated: 2025/11/07 11:48:05 by madiaz-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libprintf.h"
+#include "ft_printf.h"
 
-static int	ft_convert(const char *str, va_list args)
+static int	ft_convert(const char str, va_list args)
 {
 	int	count;
 
@@ -24,15 +24,17 @@ static int	ft_convert(const char *str, va_list args)
 	else if (str == 's')
 		count += ft_str(args, count);
 	else if (str == 'i' || str == 'd')
-		count += ft_putnbr(args);
+		count += ft_putnbr(va_arg(args, int));
 	else if (str == 'u')
-		count += ft_putunsnbr(args);
+		count += ft_putunsnbr(va_arg(args, unsigned int));
 	else if (str == 'x')
-		count += ft_puthex(args, "0123456789abcdef");
+		count += ft_puthex(va_arg(args, unsigned long long),
+				"0123456789abcdef");
 	else if (str == 'X')
-		count += ft_puthex(args, "0123456789ABCDEF");
+		count += ft_puthex(va_arg(args, unsigned int),
+				"0123456789ABCDEF");
 	else if (str == 'p')
-		count += ft_putptr(args);
+		count += ft_putptr(va_arg(args, void *));
 	return (count);
 }
 
@@ -53,7 +55,7 @@ int	ft_printf(const char *str, ...)
 			count += write(1, &str[i], 1);
 		else
 		{
-			count += ft_convert(str, args);
+			count += ft_convert(str[i + 1], args);
 			i++;
 		}
 		i++;
