@@ -28,7 +28,7 @@ static int	ft_convert(const char str, va_list args)
 	else if (str == 'u')
 		count += ft_putunsnbr(va_arg(args, unsigned int));
 	else if (str == 'x')
-		count += ft_puthex(va_arg(args, unsigned long long),
+		count += ft_puthex(va_arg(args, unsigned int),
 				"0123456789abcdef");
 	else if (str == 'X')
 		count += ft_puthex(va_arg(args, unsigned int),
