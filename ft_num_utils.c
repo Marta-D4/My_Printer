@@ -75,8 +75,8 @@ int	ft_puthex(unsigned long long nb, char *hex)
 		count += write(1, &hex[nb], 1);
 	else
 	{
-		count += ft_puthex(nb, hex);
-		count += write(1, &hex[nb % 16], 1);
+		count += ft_puthex(nb / 16, hex);
+		count += ft_puthex(nb % 16, hex);
 	}
 	return (count);
 }
